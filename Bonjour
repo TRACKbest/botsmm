@@ -1,0 +1,173 @@
+✅ Cahier des Charges Complet — bot.py (Bot SMM Telegram / Instagram)
+🎯 Objectif Global
+Créer un bot Python tout-en-un (fichier unique bot.py), fonctionnant en console, capable de :
+
+Gérer plusieurs comptes Telegram et Instagram
+
+Se connecter automatiquement (OTP pour Telegram manuelle sur console)
+
+Se connecter à un bot SMM Telegram
+
+Lire, comprendre et exécuter les tâches Instagram
+
+Boucler sur tous les comptes automatiquement
+
+Passer au compte suivant dès que les tâches sont terminées
+
+Enregistrer les logs des actions
+
+Être simple, robuste et automatisable (crash recovery, anti-ban light)
+
+🧱 Composants Fonctionnels (Tout dans bot.py)
+Voici la structure logique interne du script :
+
+1. Gestion de comptes
+Telegram
+Ajouter un compte avec numéro et OTP
+
+Supprimer un compte
+
+Enregistrer les sessions .session dans /accounts/telegram/
+
+Instagram
+Ajouter un compte avec instagrapi
+
+Vérification et login auto
+
+Supprimer un compte
+
+Sessions stockées dans /accounts/instagram/
+
+2. Connexion au bot SMM Telegram
+Utilise Telethon pour lire les messages du bot (ex: @SMMKingdomBot)
+
+Scraping intelligent du contenu des messages pour détecter les tâches :
+
+🔗 Lien du post / profil
+
+📌 Type d’action : like, follow, comment, post, story
+
+💬 Commentaire à copier/coller s’il y a lieu
+
+⚠️ Détéctions d’avertissements / erreurs
+
+3. Exécution des Tâches Instagram
+instagrapi :
+
+like_media()
+
+comment_media()
+
+follow_user()
+
+upload_photo() / upload_story()
+
+Une tâche par compte à la fois
+
+Passage automatique au compte suivant une fois terminé
+
+Gestion des erreurs :
+
+Compte bloqué / en review / bannissement → Ignoré temporairement
+
+Tâche non disponible → log + skip
+
+4. Logging & Résilience
+Logs enregistrés dans /data/logs/YYYY-MM-DD.txt
+
+Détail par compte :
+
+✅ Succès
+
+❌ Échec
+
+⚠️ Avertissements
+
+Redémarrage automatique si crash ou si le bot plante
+
+Délai entre les comptes pour anti-ban (aléatoire entre X-Y secondes)
+
+5. Mise à jour auto (optionnel)
+Fonction check_update() :
+
+Va chercher les derniers fichiers depuis GitHub
+
+Remplace bot.py si version différente
+
+6. Menu console simplifié
+bash
+Copier
+Modifier
+1. Démarrer le bot (tâches automatiques)
+2. Ajouter un compte Telegram
+3. Ajouter un compte Instagram
+4. Supprimer un compte Telegram
+5. Supprimer un compte Instagram
+6. Voir les comptes enregistrés
+7. Mettre à jour le bot
+8. Quitter
+📁 Arborescence
+bash
+Copier
+Modifier
+/my-bot/
+│
+├── bot.py                   # Fichier principal unique
+├── /accounts/
+│   ├── /telegram/           # Sessions Telethon (.session)
+│   └── /instagram/          # Sessions instagrapi (cookies ou session.json)
+├── /data/
+│   ├── accounts.json        # Liste des comptes enregistrés
+│   └── /logs/               # Logs journaliers
+🚀 Fonctionnalités Avancées (V2/V3 à prévoir)
+Fonction	Description
+🤖 Parsing intelligent	Compréhension automatique des messages du bot SMM
+🔁 Relance automatique	Redémarrage en cas d’erreur ou crash
+⏱️ Planification	Exécution toutes les X minutes
+🛡️ Anti-ban	Limitation du nombre d’actions / détection CAPTCHA
+🌍 Multi-bot	Synchronisation avec base de données distante
+🌐 Interface Web (optionnel)	Flask / FastAPI pour visualiser l’activité
+
+✨ Exemples Concrets de Tâches à Lire depuis le Bot SMM
+text
+Copier
+Modifier
+▪️ Link :
+https://www.instagram.com/p/C7MgpddNPmr/
+▪️ Action :
+Like the post below
+
+▪️ Link :
+https://www.instagram.com/p/C7MgpddNPmr/
+▪️ Action :
+Leave the comment
+Comment: That’s one of the kind 😉
+
+▪️ Link :
+https://www.instagram.com/jasy_fancy11/
+▪️ Action :
+Follow the profile
+
+❗️ Account UserInsta
+🛠 New post is required! (copy from source account and add caption)
+🧠 Parsing de message (pseudo-algo)
+python
+Copier
+Modifier
+if "Link" in message and "Action" in message:
+    action = extract_action(message)
+    link = extract_link(message)
+    comment = extract_comment_if_present(message)
+    reward = extract_reward_if_present(message)
+    execute_task(link, action, comment)
+✅ En Résumé
+Élément	Statut
+Bot tout-en-un (bot.py)	✅ Oui
+Multicompte Telegram / IG	✅ Oui
+Connexion OTP Telegram	✅ Oui
+Lecture bot SMM (Telegram)	✅ Oui
+Execution tâche Instagram	✅ Oui
+Boucle automatique par compte	✅ Oui
+Interface console uniquement	✅ Oui
+Logs et relance automatique	✅ Prévu
+IA légère et anti-ban	🔜 V2/V3
