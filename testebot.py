@@ -4,9 +4,9 @@ import asyncio
 import random
 import time
 
-api_id = 123456  # Ton vrai API ID
-api_hash = 'abcd1234...'  # Ton vrai API Hash
-phone = '+33612345678'  # Ton numéro
+api_id = 22200892  # Ton vrai API ID
+api_hash = '0892dc9bc7a249ca4124ecd1e2795525'  # Ton vrai API Hash
+phone = '+261344897133'  # Ton numéro
 bot_username = 'smmkingdomtasksbot'
 
 # Initialisation du client avec une session persistante
